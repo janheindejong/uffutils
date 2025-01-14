@@ -1,8 +1,8 @@
 import json
 import os
 
-import pyuff
 import numpy as np
+import pyuff
 
 
 def read(path: str) -> list[dict]:

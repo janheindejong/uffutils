@@ -1,6 +1,6 @@
 import pytest
 
-from uffutils import read, get_nodes, get_subset
+from uffutils import get_nodes, get_subset, read
 
 _test_file_large = "tests\\data\\large.uff"
 _test_file_small = "tests\\data\\small.uff"
