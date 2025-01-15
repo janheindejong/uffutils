@@ -32,7 +32,8 @@ def write(input: str, path: str):
 @click.argument("input", type=str)
 @click.option("--step", type=int, default=1)
 def nodes(input: str, step: int = 1):
-    ds = uffutils.file.deserialize(input)
+    ...
+    # ds = uffutils.file.deserialize(input)
     # nodes = uffutils.nodes.get_nodes(ds, step)
     # click.echo(",".join(map(str, nodes)))
 

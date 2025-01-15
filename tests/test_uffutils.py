@@ -1,20 +1,22 @@
+import math
+
 import pytest
 
-from uffutils import read, UFFData
-
+from uffutils import UFFData, read
 
 test_data = {
-    "path": "tests\\data\\large.uff", 
+    "path": "tests\\data\\large.uff",
     "properties": {
-        "n_sets": 51, 
-        "sets": [15] + [55] * 50, 
-        "n_nodes": 21521, 
-        "first_node_nums": [101, 102, 103]
-    }
+        "n_sets": 51,
+        "sets": [15] + [55] * 50,
+        "n_nodes": 21521,
+        "first_node_nums": [101, 102, 103],
+    },
 }
 
+
 @pytest.fixture
-def dataset() -> UFFData: 
+def dataset() -> UFFData:
     return read(test_data["path"])
 
 
@@ -34,18 +36,21 @@ def test_subset_step(dataset: UFFData):
     nodes = dataset.get_nodes()
     data = list(dataset.export())
 
+    expected_nodes = test_data["properties"]["first_node_nums"][::2]
+    expected_n_nodes = math.ceil(test_data["properties"]["n_nodes"] / 2)
+
     # Verify if UFF15 is handled correctly
-    assert nodes[:2] == [101, 103]
-    assert len(nodes) == 10_761
+    assert nodes[:2] == expected_nodes
+    assert len(nodes) == expected_n_nodes
 
     # Verify if UFF55 sets are handled correctly
-    assert len(data[1]["node_nums"]) == 10_761
-    assert data[1]["node_nums"][1] == 103
-    assert len(data[1]["r1"]) == 10_761
+    assert len(data[1]["node_nums"]) == expected_n_nodes
+    assert list(map(int, data[1]["node_nums"]))[:2] == expected_nodes
+    assert len(data[1]["r1"]) == expected_n_nodes
     assert data[1]["r1"][1] == 0.23208
 
 
-def test_subset_list(dataset: UFFData): 
+def test_subset_list(dataset: UFFData):
     dataset.subset(target_nodes=[101, 103])
     nodes = dataset.get_nodes()
     data = list(dataset.export())
@@ -61,17 +66,20 @@ def test_subset_list(dataset: UFFData):
     assert data[1]["r1"][1] == 0.23208
 
 
-def test_subset_max(dataset: UFFData): 
+def test_subset_max(dataset: UFFData):
     dataset.subset(n_max=3)
     nodes = dataset.get_nodes()
     data = list(dataset.export())
 
     # Verify if UFF15 is handled correctly
-    assert nodes == [101, 102, 103]
+    assert nodes == test_data["properties"]["first_node_nums"]
     assert len(nodes) == 3
 
     # Verify if UFF55 sets are handled correctly
     assert len(data[1]["node_nums"]) == 3
-    assert list(map(int, data[1]["node_nums"])) == [101, 102, 103]
+    assert (
+        list(map(int, data[1]["node_nums"]))
+        == test_data["properties"]["first_node_nums"]
+    )
     assert len(data[1]["r1"]) == 3
     assert data[1]["r1"][2] == 0.23208

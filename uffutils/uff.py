@@ -26,7 +26,7 @@ class UFFData:
                 self._datasets.append(DatasetBase(ds))
         self._validate()
 
-    def __len__(self): 
+    def __len__(self):
         return self._datasets.__len__()
 
     def get_set_types(self) -> list[int]:
@@ -43,13 +43,18 @@ class UFFData:
 
     def get_nodes(self) -> list[int]:
         return self._get_uff_15().node_nums
-    
-    def subset(self, target_nodes: list[int] | None = None, step: int | None = None, n_max: int | None = None):
-        if not target_nodes: 
+
+    def subset(
+        self,
+        target_nodes: list[int] | None = None,
+        step: int | None = None,
+        n_max: int | None = None,
+    ):
+        if not target_nodes:
             target_nodes = self.get_nodes()
-        if step: 
+        if step:
             target_nodes = target_nodes[::step]
-        if n_max: 
+        if n_max:
             target_nodes = target_nodes[:n_max]
         for ds in self._datasets:
             ds.subset(target_nodes)
