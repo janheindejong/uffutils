@@ -1,13 +1,13 @@
 [project]
 name = "uffutils"
 version = "0.1.0"
-description = "A chainable set of commandline tools for manipulating UFF files."
+description = "A set of commandline tools for manipulating UFF files."
 authors = [
     { name = "Jan Hein de Jong", email = "janhein.dejong@gmail.com" },
 ]
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = ["pyuff (>=2.4.5,<3.0.0)", "click (>=8.1.8,<9.0.0)"]
+dependencies = ["pyuff @ git+https://github.com/janheindejong/pyuff.git@bugfix-write-uff15", "click (>=8.1.8,<9.0.0)"]
 
 [project.scripts]
 uffutils = 'uffutils.__main__:main'

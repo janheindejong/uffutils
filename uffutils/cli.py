@@ -11,7 +11,7 @@ def cli(): ...
 @click.argument("inputfile", type=click.Path(exists=True))
 def describe(inputfile: str):
     data = uffutils.file.read(inputfile)
-    nodes = data.get_nodes()[:10]
+    nodes = data.get_nodes()
     click.echo(",".join(map(str, nodes)))
     # TODO: make a lot better
 
@@ -27,6 +27,9 @@ def modify(
 ):
     data = uffutils.read(inputfile)
     if nodes or nodes_step or nodes_count:
-        target_nodes = list(map(int, nodes.split(",")))
+        if nodes: 
+            target_nodes = list(map(int, nodes.split(",")))
+        else: 
+            target_nodes = None
         data.subset(target_nodes=target_nodes, step=nodes_step, n_max=nodes_count)
     uffutils.write(outputfile, data)
