@@ -17,7 +17,7 @@ test_data = {
 
 @pytest.fixture
 def dataset() -> UFFData:
-    return read(test_data["path"])
+    return read(str(test_data["path"]))
 
 
 def test_sets(dataset: UFFData):
