@@ -1,40 +1,77 @@
 import pytest
 
-from uffutils import get_nodes, get_subset, read
-
-_test_file_large = "tests\\data\\large.uff"
-_test_file_small = "tests\\data\\small.uff"
+from uffutils import read, UFFData
 
 
-@pytest.mark.parametrize(
-    "path,n_nodes,sets",
-    [(_test_file_large, 21521, [15] + [55] * 50), (_test_file_small, 3, [15, 55])],
-)
-def test_read(path: str, n_nodes: int, sets: list[int]):
-    data = read(path)
-    assert len(data) == len(sets)
-    assert [ds["type"] for ds in data] == sets
-    assert len(data[0]["node_nums"]) == n_nodes
+test_data = {
+    "path": "tests\\data\\large.uff", 
+    "properties": {
+        "n_sets": 51, 
+        "sets": [15] + [55] * 50, 
+        "n_nodes": 21521, 
+        "first_node_nums": [101, 102, 103]
+    }
+}
+
+@pytest.fixture
+def dataset() -> UFFData: 
+    return read(test_data["path"])
 
 
-@pytest.mark.parametrize(
-    "path,step,n_nodes,first",
-    [
-        (_test_file_large, 1, 21521, [101, 102, 103]),
-        (_test_file_small, 1, 3, [101, 102, 103]),
-    ],
-)
-def test_nodes(path: str, step: int, n_nodes: int, first: list[int]):
-    data = read(path)
-    nodes = get_nodes(data[0], step)
-    assert len(nodes) == n_nodes
-    assert nodes[:3] == first
+def test_sets(dataset: UFFData):
+    assert len(dataset) == test_data["properties"]["n_sets"]
+    assert dataset.get_set_types() == test_data["properties"]["sets"]
 
 
-@pytest.mark.parametrize("path,node_subset", [(_test_file_small, [101, 103])])
-def test_subset(path: str, node_subset: list[int]):
-    data = read(path)
-    data = get_subset(data, node_subset)
-    assert data[0]["node_nums"] == [101, 103]
-    assert data[1]["node_nums"] == [101, 103]
+def test_nodes(dataset: UFFData):
+    nodes = dataset.get_nodes()
+    assert len(nodes) == test_data["properties"]["n_nodes"]
+    assert nodes[:3] == test_data["properties"]["first_node_nums"]
+
+
+def test_subset_step(dataset: UFFData):
+    dataset.subset(step=2)
+    nodes = dataset.get_nodes()
+    data = list(dataset.export())
+
+    # Verify if UFF15 is handled correctly
+    assert nodes[:2] == [101, 103]
+    assert len(nodes) == 10_761
+
+    # Verify if UFF55 sets are handled correctly
+    assert len(data[1]["node_nums"]) == 10_761
+    assert data[1]["node_nums"][1] == 103
+    assert len(data[1]["r1"]) == 10_761
+    assert data[1]["r1"][1] == 0.23208
+
+
+def test_subset_list(dataset: UFFData): 
+    dataset.subset(target_nodes=[101, 103])
+    nodes = dataset.get_nodes()
+    data = list(dataset.export())
+
+    # Verify if UFF15 is handled correctly
+    assert nodes[:2] == [101, 103]
+    assert len(nodes) == 2
+
+    # Verify if UFF55 sets are handled correctly
+    assert len(data[1]["node_nums"]) == 2
+    assert data[1]["node_nums"][1] == 103
     assert len(data[1]["r1"]) == 2
+    assert data[1]["r1"][1] == 0.23208
+
+
+def test_subset_max(dataset: UFFData): 
+    dataset.subset(n_max=3)
+    nodes = dataset.get_nodes()
+    data = list(dataset.export())
+
+    # Verify if UFF15 is handled correctly
+    assert nodes == [101, 102, 103]
+    assert len(nodes) == 3
+
+    # Verify if UFF55 sets are handled correctly
+    assert len(data[1]["node_nums"]) == 3
+    assert list(map(int, data[1]["node_nums"])) == [101, 102, 103]
+    assert len(data[1]["r1"]) == 3
+    assert data[1]["r1"][2] == 0.23208

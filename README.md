@@ -1,26 +1,24 @@
 # UFF Utils 
 
-This library contains a set of pipeline tools for manipulating UFF files. It contains the following: 
-
-* `uffutils move {input_file} -x 1 -y 1 -z 1`
-* `uffutils rotate {input_file} -x 1 -y 1 -z 1`
-* `uffutils scale {input_file} --length 1000`
-* `uffutils subset {input_file} --nodes "1,2,3,4"`
-* `uffutils nodes {input_file} --step 100`
-
-This will allow us to chain things, like so: 
+This library contains a set of pipeline tools for manipulating UFF files. It works a bit like this: 
 
 ```sh
-uffutils read my_file.uff | 
-uffutils subset --nodes $(uffutils read my_file.uff | uffutils nodes --step 100) | 
-uffutils scale --length 1000 | 
-uffutils write my_output_file.uff
+uffutils modify my_original_file.uff my_subset_file.uff --nodes-step 100
+$nodes = $(uffutils describe my_subset_file.uff --nodes)
+uffutils modify my_file.uff my_output.uff `
+    --nodes-selection $nodes) `
+    --scale-length 1000 `
+    --to-global-frame `
+    --rotate 90,90,90 `
+    --translate 100,100,100
 ```
 
-Note: I might make the "reading" implicit, in case a path is passed instead of a json string. This would turn the previous command into: 
+# Alternative implementation
+
+I considered doing something with piping, but got stuck in the fact the the PyUFF library I'm using can't handle streams. It would've looking something like this: 
 
 ```sh
-uffutils my_file.uff subset --nodes $(uffutils nodes my_file.uff --step 100) | 
-uffutils scale --length 1000 | 
-uffutils write my_output_file.uff
+uffutils subset my_original_file.uff my_subset_file.uff --step 100 
+uffutils subset my_file.uff - --nodes $(uffutils describe my_subset_file.uff --nodes) | 
+uffutils scale - my_output.uff --length 1000 
 ```

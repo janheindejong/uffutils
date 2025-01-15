@@ -1,13 +1,15 @@
 import click
 
 import uffutils.file
-import uffutils.nodes
-import uffutils.subset
 
 
 @click.group()
-def cli():
-    pass
+@click.argument("input", click.File("r"))
+@click.pass_context
+def cli(ctx, input):
+    ctx.ensure_object(dict)
+
+    ctx.obj["input"] = input.read()
 
 
 @cli.command()
@@ -31,8 +33,8 @@ def write(input: str, path: str):
 @click.option("--step", type=int, default=1)
 def nodes(input: str, step: int = 1):
     ds = uffutils.file.deserialize(input)
-    nodes = uffutils.nodes.get_nodes(ds, step)
-    click.echo(",".join(map(str, nodes)))
+    # nodes = uffutils.nodes.get_nodes(ds, step)
+    # click.echo(",".join(map(str, nodes)))
 
 
 @cli.command()
@@ -40,5 +42,5 @@ def nodes(input: str, step: int = 1):
 @click.option("--nodes", type=str, required=True)
 def subset(input: str, nodes: str):
     nodes = set(map(int, nodes.split(",")))
-    data = uffutils.subset.get_subset(input, nodes)
-    click.echo(uffutils.file.serialize(data))
+    # data = uffutils.subset.get_subset(input, nodes)
+    # click.echo(uffutils.file.serialize(data))
