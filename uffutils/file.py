@@ -11,8 +11,6 @@ def read(path: str) -> UFFData:
     path = os.path.abspath(path)
     uff = pyuff.UFF(path)
     data = uff.read_sets()
-    # for ds in data:
-    #     _ndarray_to_list_in_place(ds)
     return UFFData(data)
 
 
@@ -23,7 +21,8 @@ def write(path: str, data: UFFData, overwrite: bool = True) -> str:
         mode = "overwrite"
     else:
         mode = "add"
-    uff.write_sets(data.export(), mode)
+    ds = list(data.export())
+    uff.write_sets(ds, mode)
     return path
 
 
@@ -32,10 +31,8 @@ def deserialize(data: str) -> list[dict]:
 
 
 def serialize(data: list[dict]):
+    for d in data:
+        for key, value in d.items():
+            if isinstance(value, np.ndarray):
+                d[key] = value.tolist()
     return json.dumps(data)
-
-
-def _ndarray_to_list_in_place(data: dict) -> None:
-    for key, value in data.items():
-        if isinstance(value, np.ndarray):
-            data[key] = value.tolist()

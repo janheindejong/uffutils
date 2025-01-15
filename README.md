@@ -4,9 +4,9 @@ This library contains a set of pipeline tools for manipulating UFF files. It wor
 
 ```sh
 uffutils modify my_original_file.uff my_subset_file.uff --nodes-step 100
-$nodes = $(uffutils describe my_subset_file.uff --nodes)
+$nodes = $(uffutils describe my_subset_file.uff --nodes-only)
 uffutils modify my_file.uff my_output.uff `
-    --nodes-selection $nodes) `
+    --nodes $nodes) `
     --scale-length 1000 `
     --to-global-frame `
     --rotate 90,90,90 `

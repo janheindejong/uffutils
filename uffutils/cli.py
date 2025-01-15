@@ -4,44 +4,29 @@ import uffutils.file
 
 
 @click.group()
-@click.argument("input", click.File("r"))
-@click.pass_context
-def cli(ctx, input):
-    ctx.ensure_object(dict)
-
-    ctx.obj["input"] = input.read()
+def cli(): ...
 
 
 @cli.command()
-@click.argument("path", type=str)
-def read(path: str):
-    ds = uffutils.file.read(path)
-    click.echo(uffutils.file.serialize(ds))
+@click.argument("inputfile", type=click.Path(exists=True))
+def describe(inputfile: str):
+    data = uffutils.file.read(inputfile)
+    nodes = data.get_nodes()[:10]
+    click.echo(",".join(map(str, nodes)))
+    # TODO: make a lot better
 
 
 @cli.command()
-@click.argument("input", type=str)
-@click.argument("path", type=str)
-def write(input: str, path: str):
-    ds = uffutils.file.deserialize(input)
-    path = uffutils.file.write(path, ds, True)
-    click.echo(path)
-
-
-@cli.command()
-@click.argument("input", type=str)
-@click.option("--step", type=int, default=1)
-def nodes(input: str, step: int = 1):
-    ...
-    # ds = uffutils.file.deserialize(input)
-    # nodes = uffutils.nodes.get_nodes(ds, step)
-    # click.echo(",".join(map(str, nodes)))
-
-
-@cli.command()
-@click.argument("input", type=str)
-@click.option("--nodes", type=str, required=True)
-def subset(input: str, nodes: str):
-    nodes = set(map(int, nodes.split(",")))
-    # data = uffutils.subset.get_subset(input, nodes)
-    # click.echo(uffutils.file.serialize(data))
+@click.argument("inputfile", type=click.Path(exists=True))
+@click.argument("outputfile", type=click.Path())
+@click.option("-n", "--nodes", type=str, default="")
+@click.option("--nodes-step", type=int, default=0)
+@click.option("--nodes-count", type=int, default=0)
+def modify(
+    inputfile: str, outputfile: str, nodes: str, nodes_step: int, nodes_count: int
+):
+    data = uffutils.read(inputfile)
+    if nodes or nodes_step or nodes_count:
+        target_nodes = list(map(int, nodes.split(",")))
+        data.subset(target_nodes=target_nodes, step=nodes_step, n_max=nodes_count)
+    uffutils.write(outputfile, data)
