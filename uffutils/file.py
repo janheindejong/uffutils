@@ -4,7 +4,7 @@ import os
 import numpy as np
 import pyuff
 
-from .uff import UFFData
+from .uff.uffdata import UFFData
 
 
 def read(path: str) -> UFFData:
