@@ -7,7 +7,7 @@ authors = [
 ]
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = ["pyuff @ git+https://github.com/janheindejong/pyuff.git@bugfix-write-uff15", "click (>=8.1.8,<9.0.0)"]
+dependencies = ["pyuff (>=2.4.6,<3.0.0)", "click (>=8.1.8,<9.0.0)"]
 
 [project.scripts]
 uffutils = 'uffutils.__main__:main'

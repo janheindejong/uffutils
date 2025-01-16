@@ -301,25 +301,21 @@ dev = ["argcomplete", "attrs (>=19.2)", "hypothesis (>=3.56)", "mock", "pygments
 
 [[package]]
 name = "pyuff"
-version = "2.4.3"
+version = "2.4.6"
 description = "UFF (Universal File Format) read/write."
 optional = false
 python-versions = ">=3.10"
 groups = ["main"]
-files = []
-develop = false
+files = [
+    {file = "pyuff-2.4.6-py3-none-any.whl", hash = "sha256:dd3d858622c3973392d9fef6f3cba14aa37131c154534c500c729a38e6f188e6"},
+    {file = "pyuff-2.4.6.tar.gz", hash = "sha256:98d14df0324db36d50c02defeff5cef1b9a854c7bb8cbb1c0025c67dbc7134d0"},
+]
 
 [package.dependencies]
 numpy = "*"
 
 [package.extras]
 dev = ["build", "pytest", "sphinx", "sphinx-copybutton", "sphinx-rtd-theme", "twine", "wheel"]
-
-[package.source]
-type = "git"
-url = "https://github.com/janheindejong/pyuff.git"
-reference = "bugfix-write-uff15"
-resolved_reference = "e7ff6216efc766e53a9511913aadbf1fb1ae85cd"
 
 [[package]]
 name = "ruff"
@@ -364,4 +360,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13"
-content-hash = "36e1191799dfad46ce65de9fd88096d7cabd1a7e14c682f85128589c721fc469"
+content-hash = "d53084fa83f7ec2d86650b4ecc68c77185fe1a1f18e73fa4f34fc97dd8744494"

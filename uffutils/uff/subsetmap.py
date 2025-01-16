@@ -1,47 +1,35 @@
-from typing import Iterable
-
-from uffutils.uff.dataset import Dataset, IDatasetVisitor
+from typing import Any, Iterable
 
 
-class SubsetMap(IDatasetVisitor):
-    def __init__(self, target_nodes: Iterable[int]):
-        if not isinstance(target_nodes, set):
-            self._target_nodes = set(target_nodes)
-        else:
-            self._target_nodes = target_nodes
-
-    def apply(self, dataset: Dataset) -> None:
-        if dataset.type == 15:
-            self._apply(dataset._ds, ["def_cs", "disp_cs", "color", "x", "y", "z"])
-        elif dataset.type == 55:
-            self._apply(dataset._ds, ["r1", "r2", "r3"], ["r4", "r5", "r6"])
-        else:
-            raise NotImplementedError(
-                f"Applying a subset over UFF{dataset.type} is not supported."
-            )
-
-    def _apply(
+class SubsetMap:
+    def __init__(
         self,
-        ds: dict,
+        nodes: Iterable[int],
+        target_nodes: Iterable[int],
         required_fields: list[str],
         optional_fields: list[str] | None = None,
-    ) -> None:
-        # Get indices of target nodes
-        idx = [i for i, n in (enumerate(ds["node_nums"])) if n in self._target_nodes]
+    ):
+        if not isinstance(target_nodes, set):
+            target_nodes = set(target_nodes)
+        else:
+            target_nodes = target_nodes
 
-        # Reduce node nums
-        ds["node_nums"] = self._get_subset_by_idx(ds["node_nums"], idx)
-
-        # Reduce all other fields
-        for field in required_fields:
-            ds[field] = self._get_subset_by_idx(ds[field], idx)
+        self._idx = [i for i, n in (enumerate(nodes)) if n in target_nodes]
+        self._required_fields = required_fields
         if optional_fields:
-            for field in optional_fields:
-                try:
-                    ds[field] = self._get_subset_by_idx(ds[field], idx)
-                except KeyError:
-                    # No biggie if optional fields not found (e.g., complex values)
-                    ...
+            self._optional_fields = optional_fields
+        else:
+            self._optional_fields = []
+
+    def apply(self, ds: dict[str, Any]) -> None:
+        for k in self._required_fields:
+            ds[k] = self._get_subset_by_idx(ds[k], self._idx)
+        for k in self._optional_fields:
+            try:
+                ds[k] = self._get_subset_by_idx(ds[k], self._idx)
+            except KeyError:
+                # This is no biggie
+                ...
 
     @staticmethod
     def _get_subset_by_idx(data: list, idx: list[int]) -> list:

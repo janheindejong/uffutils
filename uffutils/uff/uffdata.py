@@ -2,8 +2,7 @@ from __future__ import annotations
 
 from typing import Generator
 
-from uffutils.uff.dataset import Dataset
-from uffutils.uff.subsetmap import SubsetMap
+from uffutils.uff.dataset import Dataset, ISubsetable, UFF15Dataset, UFF55Dataset
 
 
 class UFFData:
@@ -17,12 +16,18 @@ class UFFData:
     """
 
     _datasets: list[Dataset]
+    _uff15: UFF15Dataset
 
     def __init__(self, datasets: list[dict]):
         self._datasets = []
         for ds in datasets:
-            self._datasets.append(Dataset(ds))
-        self._validate()
+            if ds["type"] == 15:
+                self._uff15 = UFF15Dataset(ds)
+                self._datasets.append(self._uff15)
+            elif ds["type"] == 55:
+                self._datasets.append(UFF55Dataset(ds))
+            else:
+                self._datasets.append(Dataset(ds))
 
     def __len__(self):
         return self._datasets.__len__()
@@ -40,7 +45,7 @@ class UFFData:
         return d
 
     def get_nodes(self) -> list[int]:
-        return self._get_uff_15().node_nums
+        return self._uff15.node_nums
 
     def subset(
         self,
@@ -54,8 +59,10 @@ class UFFData:
             target_nodes = target_nodes[::step]
         if n_max:
             target_nodes = target_nodes[:n_max]
+        target_nodes_set = set(target_nodes)
         for ds in self._datasets:
-            ds.accept(SubsetMap(target_nodes))
+            if isinstance(ds, ISubsetable):
+                ds.subset(target_nodes_set)
 
     def scale(self, length=1) -> None: ...
 
@@ -67,15 +74,9 @@ class UFFData:
 
     def export(self) -> Generator[dict]:
         for ds in self._datasets:
-            yield ds._export()
+            yield ds.export()
 
     def _validate(self) -> None:
         # Check UFF15 constraint
         if self.get_set_types().count(15) != 1:
             raise Exception("Should have exactly one UFF15 dataset.")
-
-    def _get_uff_15(self) -> Dataset:
-        for ds in self._datasets:
-            if ds.type == 15:
-                return ds
-        raise Exception("Can't find UFF15.")

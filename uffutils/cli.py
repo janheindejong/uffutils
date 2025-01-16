@@ -9,7 +9,7 @@ def cli(): ...
 
 @cli.command()
 @click.argument("inputfile", type=click.Path(exists=True))
-def describe(inputfile: str):
+def inspect(inputfile: str, fields: str):
     data = uffutils.file.read(inputfile)
     nodes = data.get_nodes()
     click.echo(",".join(map(str, nodes)))
@@ -23,13 +23,17 @@ def describe(inputfile: str):
 @click.option("--node-step", type=int, default=0)
 @click.option("--node-count", type=int, default=0)
 def modify(
-    inputfile: str, outputfile: str, nodes: str, nodes_step: int, nodes_count: int
+    inputfile: str,
+    outputfile: str,
+    node_selection: str,
+    node_step: int,
+    node_count: int,
 ):
     data = uffutils.read(inputfile)
-    if nodes or nodes_step or nodes_count:
-        if nodes:
-            target_nodes = list(map(int, nodes.split(",")))
+    if node_selection or node_step or node_count:
+        if node_selection:
+            target_nodes = list(map(int, node_selection.split(",")))
         else:
             target_nodes = None
-        data.subset(target_nodes=target_nodes, step=nodes_step, n_max=nodes_count)
+        data.subset(target_nodes=target_nodes, step=node_step, n_max=node_count)
     uffutils.write(outputfile, data)
