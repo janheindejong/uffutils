@@ -19,17 +19,17 @@ def describe(inputfile: str):
 @cli.command()
 @click.argument("inputfile", type=click.Path(exists=True))
 @click.argument("outputfile", type=click.Path())
-@click.option("-n", "--nodes", type=str, default="")
-@click.option("--nodes-step", type=int, default=0)
-@click.option("--nodes-count", type=int, default=0)
+@click.option("--node-selection", type=str, default="")
+@click.option("--node-step", type=int, default=0)
+@click.option("--node-count", type=int, default=0)
 def modify(
     inputfile: str, outputfile: str, nodes: str, nodes_step: int, nodes_count: int
 ):
     data = uffutils.read(inputfile)
     if nodes or nodes_step or nodes_count:
-        if nodes: 
+        if nodes:
             target_nodes = list(map(int, nodes.split(",")))
-        else: 
+        else:
             target_nodes = None
         data.subset(target_nodes=target_nodes, step=nodes_step, n_max=nodes_count)
     uffutils.write(outputfile, data)
