@@ -1,8 +1,7 @@
-import json
 import click
 
 import uffutils.file
-from uffutils.view import AggregationMode, CustomJSONEncoder, UFFDataView
+from uffutils.view import UFFDataViewer
 
 
 @click.group()
@@ -11,18 +10,14 @@ def cli(): ...
 
 @cli.command()
 @click.argument("inputfile", type=click.Path(exists=True))
-@click.option("--fields", type=str, default="")
-@click.option("--summary", "aggregation", flag_value=AggregationMode.SUMMARY, default=True)
-@click.option("--full", "aggregation", flag_value=AggregationMode.FULL)
-def inspect(inputfile: str, fields: str, aggregation: AggregationMode):
+@click.option("--nodes", is_flag=True)
+def inspect(inputfile: str, nodes: bool):
     data = uffutils.file.read(inputfile)
-    view = UFFDataView(data)
-    res = view.as_dict()
-    if fields: 
-        _split_fields = fields.split(",")
-        res = {key: res[key] for key in _split_fields if key in view.fields}
-    else: 
-        click.echo(json.dumps(res, indent=2, cls=CustomJSONEncoder))
+    view = UFFDataViewer(data)
+    if nodes:
+        print(view.print_nodes())
+    else:
+        print(view.print_summary())
 
 
 @cli.command()

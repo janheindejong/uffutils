@@ -45,36 +45,12 @@ Nodes:
 ```
 
 ```sh
-uffutils inspect my_file.uff --property nodes --full  # Nice overview 
+uffutils inspect my_file.uff --nodes  # Full list of nodes
 ```
 
 ```
 1, 2, 3, 4, 5
 ```
-
-```sh
-uffutils inspect my_file.uff --full  # Nice overview 
-```
-
-```
-Sets: 1, 2, 3, 4, 5
-Nodes: 1, 2, 3, 4, 5
-```
-
-```sh
-uffutils inspect my_file.uff --set 0  # Nice overview 
-```
-
-```
-Type: 55
-Nodes: 
-    Number of nodes: 2000 
-    Nodes: 1, 2, 3, ..., 1998, 1999, 2000
-
-Nodes: 1, 2, 3, 4, 5
-```
-
-
 
 # Alternative implementation
 
