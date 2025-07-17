@@ -26,7 +26,13 @@ class ISubsetable(Protocol):
     def subset(self, target_nodes: Iterable[int]) -> None: ...
 
 
-class UFF15Dataset(Dataset, ISubsetable):
+@runtime_checkable
+class IScaleable(Protocol):
+    @abstractmethod
+    def scale(self, length: float | int) -> None: ...
+
+
+class UFF15Dataset(Dataset, ISubsetable, IScaleable):
     @property
     def node_nums(self) -> list[int]:
         return list(map(int, self._ds["node_nums"]))
@@ -38,6 +44,10 @@ class UFF15Dataset(Dataset, ISubsetable):
             ["node_nums", "def_cs", "disp_cs", "color", "x", "y", "z"],
         )
         subset_map.apply(self._ds)
+
+    def scale(self, length: float | int) -> None:
+        for d in "xyz":
+            self._ds[d] = [val * length for val in self._ds[d]]
 
 
 class UFF55Dataset(Dataset, ISubsetable):

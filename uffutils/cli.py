@@ -26,12 +26,14 @@ def inspect(inputfile: str, nodes: bool):
 @click.option("--node-selection", type=str, default="")
 @click.option("--node-step", type=int, default=0)
 @click.option("--node-count", type=int, default=0)
+@click.option("--scale-length", type=float, default=1)
 def modify(
     inputfile: str,
     outputfile: str,
     node_selection: str,
     node_step: int,
     node_count: int,
+    scale_length: float,
 ):
     data = uffutils.read(inputfile)
     if node_selection or node_step or node_count:
@@ -40,4 +42,6 @@ def modify(
         else:
             target_nodes = None
         data.subset(target_nodes=target_nodes, step=node_step, n_max=node_count)
+    if abs(scale_length - 1) > 1e-9: 
+        data.scale(length=scale_length)
     uffutils.write(outputfile, data)

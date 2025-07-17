@@ -2,7 +2,13 @@ from __future__ import annotations
 
 from typing import Generator
 
-from uffutils.uff.dataset import Dataset, ISubsetable, UFF15Dataset, UFF55Dataset
+from uffutils.uff.dataset import (
+    Dataset,
+    IScaleable,
+    ISubsetable,
+    UFF15Dataset,
+    UFF55Dataset,
+)
 
 
 class UFFData:
@@ -64,7 +70,10 @@ class UFFData:
             if isinstance(ds, ISubsetable):
                 ds.subset(target_nodes_set)
 
-    def scale(self, length=1) -> None: ...
+    def scale(self, length: float = 1.0) -> None: 
+        for ds in self._datasets: 
+            if isinstance(ds, IScaleable):
+                ds.scale(length=length)
 
     def rotate(self, r_x, r_y, r_z) -> None: ...
 
