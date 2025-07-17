@@ -6,6 +6,7 @@ from uffutils.uff.dataset import (
     Dataset,
     IScaleable,
     ISubsetable,
+    ITranslatable,
     UFF15Dataset,
     UFF55Dataset,
 )
@@ -77,7 +78,10 @@ class UFFData:
 
     def rotate(self, r_x, r_y, r_z) -> None: ...
 
-    def translate(self, x, y, z) -> None: ...
+    def translate(self, x, y, z) -> None:
+        for ds in self._datasets:
+            if isinstance(ds, ITranslatable):
+                ds.translate(x, y, z)
 
     def cs_to_global(self) -> None: ...
 

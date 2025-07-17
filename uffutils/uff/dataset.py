@@ -32,7 +32,13 @@ class IScaleable(Protocol):
     def scale(self, length: float | int) -> None: ...
 
 
-class UFF15Dataset(Dataset, ISubsetable, IScaleable):
+@runtime_checkable
+class ITranslatable(Protocol):
+    @abstractmethod
+    def translate(self, x: float, y: float, z: float) -> None: ...
+
+
+class UFF15Dataset(Dataset, ISubsetable, IScaleable, ITranslatable):
     @property
     def node_nums(self) -> list[int]:
         return list(map(int, self._ds["node_nums"]))
@@ -47,7 +53,11 @@ class UFF15Dataset(Dataset, ISubsetable, IScaleable):
 
     def scale(self, length: float | int) -> None:
         for d in "xyz":
-            self._ds[d] = [val * length for val in self._ds[d]]
+            self._ds[d] = [pos * length for pos in self._ds[d]]
+
+    def translate(self, x: float, y: float, z: float) -> None:
+        for translation, d in zip((x, y, z), "xyz", strict=False):
+            self._ds[d] = [pos + translation for pos in self._ds[d]]
 
 
 class UFF55Dataset(Dataset, ISubsetable):

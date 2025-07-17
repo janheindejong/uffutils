@@ -85,7 +85,7 @@ def test_subset_max(dataset: UFFData):
     assert data[1]["r1"][2] == 0.23208
 
 
-def test_scale_length(dataset: UFFData):
+def test_scale(dataset: UFFData):
     dataset.subset(n_max=3)
     dataset.scale(length=10)
     data = list(dataset.export())
@@ -94,3 +94,14 @@ def test_scale_length(dataset: UFFData):
     assert data[0]["x"] == pytest.approx([1198.5, 1198.5, 1198.5])
     assert data[0]["y"] == pytest.approx([64.38, 392.46, 720.55])
     assert data[0]["z"] == pytest.approx([126.82, 126.82, 126.82])
+
+
+def test_translate(dataset: UFFData):
+    dataset.subset(n_max=3)
+    dataset.translate(1, 2, 3)
+    data = list(dataset.export())
+
+    # Verify UFF15 is translated correctly
+    assert data[0]["x"] == pytest.approx([120.85, 120.85, 120.85])
+    assert data[0]["y"] == pytest.approx([8.437999, 41.246, 74.055])
+    assert data[0]["z"] == pytest.approx([15.682, 15.682, 15.682])

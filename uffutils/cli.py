@@ -1,3 +1,5 @@
+import sys
+
 import click
 
 import uffutils.file
@@ -27,6 +29,7 @@ def inspect(inputfile: str, nodes: bool):
 @click.option("--node-step", type=int, default=0)
 @click.option("--node-count", type=int, default=0)
 @click.option("--scale-length", type=float, default=1)
+@click.option("--translate", type=str, default="")
 def modify(
     inputfile: str,
     outputfile: str,
@@ -34,6 +37,7 @@ def modify(
     node_step: int,
     node_count: int,
     scale_length: float,
+    translate: str,
 ):
     data = uffutils.read(inputfile)
     if node_selection or node_step or node_count:
@@ -44,4 +48,11 @@ def modify(
         data.subset(target_nodes=target_nodes, step=node_step, n_max=node_count)
     if abs(scale_length - 1) > 1e-9:
         data.scale(length=scale_length)
+    if translate:
+        try:
+            x, y, z = [float(val) for val in translate.split(",")]
+            data.translate(x, y, z)
+        except Exception as e:
+            sys.stderr.write(f"Couldn't parse translation '{translate}': {e}")
+            sys.exit(1)
     uffutils.write(outputfile, data)
