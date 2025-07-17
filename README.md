@@ -13,6 +13,23 @@ uffutils modify my_file.uff my_output.uff `
     --translate 100,100,100
 ```
 
+# Installing
+
+A good way to run UFF utils is through [`uv`](https://docs.astral.sh/uv/getting-started/installation/). 
+
+To install `uv`, run: 
+
+```powershell 
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+Once installed, you can run `uffutils` like so: 
+
+```powershell 
+uvx uffutils --help
+```
+
+
 # The `inspect` command 
 
 The `inspect` command allows you to view the contents of a UFF file. Example usage: 
