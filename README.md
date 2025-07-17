@@ -4,7 +4,7 @@ This library contains a set of pipeline tools for manipulating UFF files. It wor
 
 ```sh
 uffutils modify my_original_file.uff my_subset_file.uff --node-step 100 --node-count 1000
-$nodes = $(uffutils describe my_subset_file.uff --nodes-only)
+$nodes = $(uffutils inspect my_subset_file.uff --nodes-only)
 uffutils modify my_file.uff my_output.uff `
     --node-selection $nodes `
     --scale-length 1000 `
@@ -17,7 +17,7 @@ uffutils modify my_file.uff my_output.uff `
 
 ```sh 
 uffutils inspect my_file.uff  # Nice overview 
-uffutils inspect my_file.uff --properties nodes --full # Full list of nodes
+uffutils inspect my_file.uff --property nodes --full # Full list of nodes
 uffutils inspect my_file.uff --sets 0 # Description of dataset 0, including available properties
 uffutils inspect my_file.uff --sets 1 --property r1,r2,r3 --mean
 ```
@@ -29,6 +29,52 @@ Basically, we have several options:
 --properties [string]  # What properties to focus on; if just one property is selected, no labelling is applied (default is all)
 --sets [int] # What sets to focus on (default is None)
 ```
+
+```sh
+uffutils inspect my_file.uff  # Nice overview 
+```
+
+```
+Sets: 
+    Number of sets: 5
+    Set count: 1 (1), 18 (1), 55 (50)
+    Set types: 1, 1, 1, ..., 55, 55 
+Nodes: 
+    Number of nodes: 2000 
+    Nodes: 1, 2, 3, ..., 1998, 1999, 2000
+```
+
+```sh
+uffutils inspect my_file.uff --property nodes --full  # Nice overview 
+```
+
+```
+1, 2, 3, 4, 5
+```
+
+```sh
+uffutils inspect my_file.uff --full  # Nice overview 
+```
+
+```
+Sets: 1, 2, 3, 4, 5
+Nodes: 1, 2, 3, 4, 5
+```
+
+```sh
+uffutils inspect my_file.uff --set 0  # Nice overview 
+```
+
+```
+Type: 55
+Nodes: 
+    Number of nodes: 2000 
+    Nodes: 1, 2, 3, ..., 1998, 1999, 2000
+
+Nodes: 1, 2, 3, 4, 5
+```
+
+
 
 # Alternative implementation
 
