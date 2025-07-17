@@ -1,23 +1,14 @@
 # UFF Utils 
 
-This library contains a set of pipeline tools for manipulating UFF files. It works a bit like this: 
+UFF Utils is a command-line tool for manipulating UFF files. For example: 
 
-```sh
-uffutils modify my_original_file.uff my_subset_file.uff --node-step 100 --node-count 1000
-$nodes = $(uffutils inspect my_subset_file.uff --nodes-only)
-uffutils modify my_file.uff my_output.uff `
-    --node-selection $nodes `
-    --scale-length 1000 `
-    --to-global-frame `
-    --rotate 90,90,90 `
-    --translate 100,100,100
+```powershell
+uffutils modify input.uff output.uff --scale-length 100 --rotate 90,90,90 --translate 100,100,100
 ```
 
 # Installing
 
-A good way to run UFF utils is through [`uv`](https://docs.astral.sh/uv/getting-started/installation/). 
-
-To install `uv`, run: 
+A good way to run UFF utils is through [`uv`](https://docs.astral.sh/uv/getting-started/installation/). To install `uv`, run: 
 
 ```powershell 
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
@@ -28,7 +19,6 @@ Once installed, you can run `uffutils` like so:
 ```powershell 
 uvx uffutils --help
 ```
-
 
 # The `inspect` command 
 
