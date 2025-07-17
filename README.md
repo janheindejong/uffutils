@@ -15,41 +15,46 @@ uffutils modify my_file.uff my_output.uff `
 
 # The `inspect` command 
 
-```sh 
-uffutils inspect my_file.uff  # Nice overview 
-uffutils inspect my_file.uff --property nodes --full # Full list of nodes
-uffutils inspect my_file.uff --sets 0 # Description of dataset 0, including available properties
-uffutils inspect my_file.uff --sets 1 --property r1,r2,r3 --mean
-```
-
-Basically, we have several options: 
+The `inspect` command allows you to view the contents of a UFF file. Example usage: 
 
 ```sh 
---full/--mean/--max/--summary  # Tells what to do with a range of numbers (default is summary)
---properties [string]  # What properties to focus on; if just one property is selected, no labelling is applied (default is all)
---sets [int] # What sets to focus on (default is None)
+uffutils inspect my_file.uff  # Print nice overview 
+uffutils inspect my_file.uff --nodes # Print full list of nodes
 ```
+
+# The `modify` command
+
+The `modify` command allows you to modify a UFF file. For example, you can create a file with a subset of nodes in various ways: 
 
 ```sh
-uffutils inspect my_file.uff  # Nice overview 
+uffutils modify my_file.uff list_of_nodes.uff --node-selection "1, 2, 3"
+uffutils modify my_file.uff first_ten_nodes.uff --node-count 10 
+uffutils modify my_file.uff every_tenth_node.uff --node-step 10 
 ```
 
-```
-Sets: 
-    Number of sets: 5
-    Set count: 1 (1), 18 (1), 55 (50)
-    Set types: 1, 1, 1, ..., 55, 55 
-Nodes: 
-    Number of nodes: 2000 
-    Nodes: 1, 2, 3, ..., 1998, 1999, 2000
-```
+You can scale length: 
 
 ```sh
-uffutils inspect my_file.uff --nodes  # Full list of nodes
+uffutils modify my_file.uff m_to_mm.uff --scale-length 1000 
 ```
 
+And do various other operations: 
+
+```sh
+uffutils modify my_file.uff in_global_frame.uff --to-global-frame 
+uffutils modify my_file.uff rotated_euler_xyz.uff --rotate "90,90,90" 
+uffutils modify my_file.uff translated_xyz.uff --translate "10,20,30"
 ```
-1, 2, 3, 4, 5
+
+And you do all these things at once: 
+
+```sh 
+uffutils modify my_file.uff my_output.uff `
+    --node-selection "1,2,3" `
+    --scale-length 1000 `
+    --to-global-frame `
+    --rotate 90,90,90 `
+    --translate 100,100,100
 ```
 
 # Alternative implementation
