@@ -6,21 +6,15 @@ UFF Utils is a command-line tool for manipulating UFF files. For example:
 uffutils modify input.uff output.uff --scale-length 100 --rotate 90,90,90 --translate 100,100,100
 ```
 
-# Installing
+## Installing
 
-A good way to run UFF utils is through [`uv`](https://docs.astral.sh/uv/getting-started/installation/). To install `uv`, run: 
-
-```powershell 
-powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
-```
-
-Once installed, you can run `uffutils` like so: 
+A good way to run UFF utils is through [`uv`](https://docs.astral.sh/uv/getting-started/installation/). Once you have installed `uv`, you can run `uffutils` like so: 
 
 ```powershell 
 uvx uffutils --help
 ```
 
-# The `inspect` command 
+## The `inspect` command 
 
 The `inspect` command allows you to view the contents of a UFF file. Example usage: 
 
@@ -29,7 +23,7 @@ uffutils inspect my_file.uff  # Print nice overview
 uffutils inspect my_file.uff --nodes # Print full list of nodes
 ```
 
-# The `modify` command
+## The `modify` command
 
 The `modify` command allows you to modify a UFF file. For example, you can create a file with a subset of nodes in various ways: 
 
@@ -64,7 +58,7 @@ uffutils modify my_file.uff my_output.uff `
     --translate 100,100,100
 ```
 
-# Alternative implementation
+## Alternative implementation
 
 I considered doing something with piping, but got stuck in the fact the the PyUFF library I'm using can't handle streams. It would've looking something like this: 
 

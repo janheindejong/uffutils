@@ -42,6 +42,6 @@ def modify(
         else:
             target_nodes = None
         data.subset(target_nodes=target_nodes, step=node_step, n_max=node_count)
-    if abs(scale_length - 1) > 1e-9: 
+    if abs(scale_length - 1) > 1e-9:
         data.scale(length=scale_length)
     uffutils.write(outputfile, data)

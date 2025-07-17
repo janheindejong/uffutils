@@ -84,7 +84,8 @@ def test_subset_max(dataset: UFFData):
     assert len(data[1]["r1"]) == 3
     assert data[1]["r1"][2] == 0.23208
 
-def test_scale_length(dataset: UFFData): 
+
+def test_scale_length(dataset: UFFData):
     dataset.subset(n_max=3)
     dataset.scale(length=10)
     data = list(dataset.export())

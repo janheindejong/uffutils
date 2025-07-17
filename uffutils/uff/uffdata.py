@@ -70,8 +70,8 @@ class UFFData:
             if isinstance(ds, ISubsetable):
                 ds.subset(target_nodes_set)
 
-    def scale(self, length: float = 1.0) -> None: 
-        for ds in self._datasets: 
+    def scale(self, length: float = 1.0) -> None:
+        for ds in self._datasets:
             if isinstance(ds, IScaleable):
                 ds.scale(length=length)
 
