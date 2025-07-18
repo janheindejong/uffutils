@@ -1,6 +1,6 @@
 # UFF Utils 
 
-UFF Utils is a command-line tool for inspecting and manipulating UFF files (e.g., take subsets, move, rotate, scale). For example, if you want to take a subset of every 1000th node and scale a file from m to mm, and inspect the resulting file, you can do: 
+UFF Utils is a command-line tool for inspecting and manipulating UFF files (e.g., take subsets, move, rotate, scale). For example, if you want to take a subset of every 1000th node, scale from m to mm, and inspect the resulting file, you can do: 
 
 ```powershell 
 uffutils subset in.uff subset.uff --step 1000
@@ -73,10 +73,11 @@ uffutils rotate in.uff out.uff --xyz 90 90 90 --origin 0 0 0
 
 ## Combining operations in a single command 
 
-You can pipe commands, like so: 
+You can combine commands through piping, like so: 
 
 ```sh
 uffutils subset in.uff --step 100 | `
     uffutils scale --length 1000 | `
-    uffutils move - out.uff --xyz 10 20 30 `
+    uffutils move --xyz 10 20 30 | `
+    uffutils rotate - out.uff --xyz 90 0 0 
 ```
