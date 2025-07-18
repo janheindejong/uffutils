@@ -29,4 +29,6 @@ jobs:
         curl -LsSf https://astral.sh/uv/install.sh | sh
         uv sync
     - name: Run tests 
-      run: uv run ./scripts/tests.sh
+      run: |
+        chmod +x ./scripts/tests.sh
+        uv run ./scripts/tests.sh
