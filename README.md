@@ -18,6 +18,8 @@ A good way to run UFF utils is through [`uv`](https://docs.astral.sh/uv/getting-
 uvx uffutils --help
 ```
 
+No need for any additional software (e.g., Python); `uv` handles it for you. 
+
 ## The `inspect` command 
 
 The `inspect` command allows you to view the contents of a UFF file. Example usage: 
