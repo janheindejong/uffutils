@@ -1,6 +1,6 @@
 [project]
 name = "uffutils"
-version = "0.3.1"
+version = "0.4.0"
 description = "A set of commandline tools for manipulating UFF files."
 authors = [{ name = "Jan Hein de Jong", email = "janhein.dejong@gmail.com" }]
 requires-python = ">=3.13"
