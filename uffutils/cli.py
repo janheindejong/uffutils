@@ -16,7 +16,7 @@ def cli(): ...
 @click.argument("inputfile", type=click.Path(exists=True, allow_dash=True))
 @click.option("--nodes", is_flag=True)
 def inspect(inputfile: str, nodes: bool):
-    data = _get_data(inputfile)
+    data = _read_input(inputfile)
     view = UFFDataViewer(data)
     if nodes:
         print(view.print_nodes())
@@ -44,14 +44,10 @@ def subset(
     step: int,
     max: int,
 ):
-    data = _get_data(inputfile)
-    if ids or step or max:
-        if ids:
-            target_nodes = list(map(int, ids.split(",")))
-        else:
-            target_nodes = None
-        data.subset(target_nodes=target_nodes, step=step, n_max=max)
-    _handle_output(data, outputfile)
+    data = _read_input(inputfile)
+    target_nodes = list(map(int, ids.split(","))) if ids else None
+    data.subset(target_nodes=target_nodes, step=step, n_max=max)
+    _write_output(data, outputfile)
 
 
 @cli.command()
@@ -66,10 +62,10 @@ def subset(
 )
 @click.option("--length", type=float, default=1)
 def scale(inputfile: str, outputfile: str, length: float):
-    data = _get_data(inputfile)
+    data = _read_input(inputfile)
     if abs(length - 1) > 1e-9:
         data.scale(length=length)
-    _handle_output(data, outputfile)
+    _write_output(data, outputfile)
 
 
 @cli.command()
@@ -84,20 +80,20 @@ def scale(inputfile: str, outputfile: str, length: float):
 )
 @click.option("--xyz", nargs=3, type=float, default=(0, 0, 0))
 def move(inputfile: str, outputfile: str, xyz: tuple[float, float, float]):
-    data = _get_data(inputfile)
+    data = _read_input(inputfile)
     data.translate(*xyz)
-    _handle_output(data, outputfile)
+    _write_output(data, outputfile)
 
 
-def _get_data(path) -> UFFData:
+def _read_input(path) -> UFFData:
     if path == "-":
         path = sys.stdin.readline().strip()
     return uffutils.read(path)
 
 
-def _handle_output(data, path):
+def _write_output(data, path):
     if path == "-":
         with tempfile.TemporaryFile() as f:
             path = f.name
     uffutils.write(path, data)
-    print(path)
+    sys.stdout.write(path)
