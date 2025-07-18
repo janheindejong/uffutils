@@ -1,11 +1,12 @@
 import math
+from pathlib import Path
 
 import pytest
 
 from uffutils import UFFData, read
 
 test_data = {
-    "path": "tests\\data\\large.uff",
+    "path": Path("tests/data/large.uff"),
     "properties": {
         "n_sets": 51,
         "sets": [15] + [55] * 50,

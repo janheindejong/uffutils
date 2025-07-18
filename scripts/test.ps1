@@ -2,4 +2,4 @@ $ErrorActionPreference = "Stop"
 
 ruff check 
 pytest 
-mypy .\uffutils --follow-untyped-imports
+mypy uffutils --follow-untyped-imports
