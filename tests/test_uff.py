@@ -1,19 +1,12 @@
 import math
-from pathlib import Path
 
 import pytest
 
 from uffutils import UFFData, read
 
-test_data = {
-    "path": Path("tests/data/large.uff"),
-    "properties": {
-        "n_sets": 51,
-        "sets": [15] + [55] * 50,
-        "n_nodes": 21521,
-        "first_node_nums": [101, 102, 103],
-    },
-}
+from .data import datasets
+
+test_data = datasets["large"]
 
 
 @pytest.fixture

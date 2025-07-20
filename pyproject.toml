@@ -9,6 +9,20 @@ dependencies = [
     "pyuff (>=2.4.6,<3.0.0)",
     "click (>=8.1.8,<9.0.0)",
 ]
+classifiers = [
+    "Development Status :: 3 - Alpha", 
+    "Environment :: Console",
+    "Intended Audience :: Manufacturing", 
+    "License :: OSI Approved :: MIT License", 
+    "Topic :: Scientific/Engineering", 
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13"
+]
+
+[project.urls]
+Homepage = "https://github.com/janheindejong/uffutils"
+Repository = "https://github.com/janheindejong/uffutils"
 
 [project.scripts]
 uffutils = "uffutils.__main__:main"

@@ -1,0 +1,476 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Tem",
+				"TemporaryFile"
+			],
+			[
+				"input",
+				"inputfile"
+			],
+			[
+				"inp",
+				"inputfile"
+			],
+			[
+				"wr",
+				"write"
+			],
+			[
+				"scal",
+				"scale_length"
+			],
+			[
+				"prin",
+				"print_summary"
+			],
+			[
+				"p",
+				"print_full"
+			],
+			[
+				"UFFDa",
+				"UFFDataViewer"
+			],
+			[
+				"Summar",
+				"SUMMARY"
+			],
+			[
+				"UFF",
+				"UFFDataViewer"
+			],
+			[
+				"from_",
+				"from_rotvec"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "uffutils.sublime-project",
+			"settings":
+			{
+				"buffer_size": 244,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Jan-HeindeJong/source/repos/uffutils/pyproject.toml",
+			"settings":
+			{
+				"buffer_size": 1176,
+				"line_ending": "Windows"
+			},
+			"undo_stack":
+			[
+			]
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"open ",
+				"Debugger: Open"
+			],
+			[
+				"debu",
+				"Debugger: Open"
+			],
+			[
+				"fo",
+				"LSP: Format File"
+			],
+			[
+				"debug",
+				"Debugger: Open"
+			],
+			[
+				"instal pa",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: Remove Package"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"for",
+				"LSP: Format File"
+			],
+			[
+				"form",
+				"LSP: Format File"
+			],
+			[
+				"lsp settin",
+				"Preferences: LSP Settings"
+			],
+			[
+				"lsp setting",
+				"Preferences: LSP Settings"
+			],
+			[
+				"lsp toggle l",
+				"LSP: Toggle Log Panel"
+			],
+			[
+				"",
+				"Build With: Python"
+			],
+			[
+				"install p",
+				"Package Control: Install Package"
+			],
+			[
+				"package rem",
+				"Package Control: Remove Package"
+			],
+			[
+				"package control inst",
+				"Package Control: Install Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"package contr",
+				"Package Control: List Packages"
+			],
+			[
+				"install",
+				"Install Package Control"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 214.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/Jan-HeindeJong/source/repos/uffutils",
+		"/C/Users/Jan-HeindeJong/source/repos/uffutils/tests",
+		"/C/Users/Jan-HeindeJong/source/repos/uffutils/tests/data",
+		"/C/Users/Jan-HeindeJong/source/repos/uffutils/uffutils"
+	],
+	"file_history":
+	[
+		"/C/Users/Jan-HeindeJong/source/repos/uffutils/.sublime/uffutils.sublime-project",
+		"/C/Users/Jan-HeindeJong/source/repos/uffutils/pyproject.toml",
+		"/C/Users/Jan-HeindeJong/source/repos/uffutils/tests/test_uff.py",
+		"/C/Users/Jan-HeindeJong/source/repos/uffutils/tests/data/__init__.py",
+		"/C/Users/Jan-HeindeJong/source/repos/uffutils/tests/test_e2e.py",
+		"/C/Users/Jan-HeindeJong/source/repos/uffutils/README.md",
+		"/C/Users/Jan-HeindeJong/source/repos/uffutils/uffutils/cli.py",
+		"/C/Users/Jan-HeindeJong/source/repos/uffutils/test.sublime-project",
+		"/C/Users/Jan-HeindeJong/source/repos/uffutils/tests/datasets.py",
+		"/C/Users/Jan-HeindeJong/source/repos/uffutils/.gitignore",
+		"/C/Users/Jan-HeindeJong/source/repos/uffutils/uffutils/uff/dataset.py",
+		"/C/Users/Jan-HeindeJong/source/repos/uffutils/uffutils/uff/uffdata.py",
+		"/C/Users/Jan-HeindeJong/source/repos/uffutils/test.uff",
+		"/C/Users/Jan-HeindeJong/source/repos/uffutils/scripts/tests.sh",
+		"/C/Users/Jan-HeindeJong/source/repos/uffutils/.github/workflows/python-package.yml",
+		"/C/Users/Jan-HeindeJong/source/repos/uffutils/scripts/test.ps1",
+		"/C/Users/Jan-HeindeJong/source/repos/uffutils/tests/test_uffdata.py",
+		"/C/Users/Jan-HeindeJong/source/repos/uffutils/-",
+		"/C/Users/Jan-HeindeJong/OneDrive/Documents/Carriere/Data/Allseas/Python/Intro to Python/intro_to_python.py",
+		"/C/Users/Jan-HeindeJong/source/repos/uffutils/uffutils/view.py",
+		"/C/Users/Jan-HeindeJong/VIBES/VIBES - Strategy & Organization/20 Strategic projects/60 License Provider Selection/02 Implementation/Script/get_floatingserver_analytics.py",
+		"/C/Users/Jan-HeindeJong/source/scripts/gimbal-lock.py",
+		"/C/Users/Jan-HeindeJong/source/pydpf-sandbox/test.py",
+		"/C/Users/Jan-HeindeJong/AppData/Local/VIBES.technology/DEMO/VIBESLicenseConfig.json",
+		"/C/Users/Jan-HeindeJong/AppData/Local/LicenseSpring/DEMO/License.key",
+		"/C/Users/Jan-HeindeJong/AppData/Roaming/Sublime Text/Packages/LSP/LSP.sublime-settings",
+		"/C/Users/Jan-HeindeJong/AppData/Roaming/Sublime Text/Packages/User/LSP.sublime-settings",
+		"/C/Users/Jan-HeindeJong/source/sublime-experiment/sublime-experiment/main.py",
+		"/C/Users/Jan-HeindeJong/source/manim-experiments/frequency-response-functions/harmonic_oscillator.py",
+		"/C/Users/Jan-HeindeJong/source/manim-experiments/pyproject.toml",
+		"/C/Users/Jan-HeindeJong/source/manim-experiments/my_first_manim_experiment.py",
+		"/C/Users/Jan-HeindeJong/source/manim-experiments/my-project/main.py"
+	],
+	"find":
+	{
+		"height": 27.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "uffutils.sublime-project",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 244,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								},
+								{
+									"selector": "- comment - punctuation.separator - punctuation.definition.string.end - constant.character.escape - invalid.illegal - punctuation.section.mapping - punctuation.section.sequence",
+									"server": "LSP-json"
+								}
+							],
+							"lsp_active": true,
+							"lsp_uri": "file:///C:/Users/Jan-HeindeJong/source/repos/uffutils/.sublime/uffutils.sublime-project",
+							"show_definitions": false,
+							"syntax": "Packages/JSON/JSON.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/C/Users/Jan-HeindeJong/source/repos/uffutils/pyproject.toml",
+					"selected": true,
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 1176,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								677,
+								677
+							]
+						],
+						"settings":
+						{
+							"lsp_uri": "file:///C:/Users/Jan-HeindeJong/source/repos/uffutils/pyproject.toml",
+							"syntax": "Packages/TOML/TOML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 432.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"stack_multiselect": false,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 39.0
+	},
+	"input":
+	{
+		"height": 39.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.Debugger":
+	{
+		"height": 262.0,
+		"history":
+		[
+		]
+	},
+	"output.Debugger Console":
+	{
+		"height": 262.0,
+		"history":
+		[
+		]
+	},
+	"output.LSP Log Panel":
+	{
+		"height": 130.0,
+		"history":
+		[
+		]
+	},
+	"output.diagnostics":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"output.exec":
+	{
+		"height": 377.0,
+		"history":
+		[
+		]
+	},
+	"output.find_results":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"pinned_build_system": "",
+	"project": "uffutils.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+		"lsp_show_inlay_hints": false
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 217.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

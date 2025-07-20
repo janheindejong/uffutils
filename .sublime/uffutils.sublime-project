@@ -1,0 +1,17 @@
+{
+	"folders":
+	[
+		{
+			"path": "C:\\Users\\Jan-HeindeJong\\source\\repos\\uffutils",
+		}
+	],
+	"debugger_configurations":
+	[
+		{
+			"name": "Python: Current File",
+			"type": "python",
+			"request": "launch",
+			"program": "${file}"
+		},
+	],
+}
