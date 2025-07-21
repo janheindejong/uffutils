@@ -1,5 +1,14 @@
 # UFF Utils 
 
+*A modular tool for manipulating UFF datasets_*
+
+[![PyPI version](https://badge.fury.io/py/uffutils.svg)](https://badge.fury.io/py/uffutils)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Python versions](https://img.shields.io/pypi/pyversions/uffutils)]()
+![example branch parameter](https://github.com/janheindejong/uffutils/actions/workflows/python-package.yml/badge.svg?branch=main)
+
+---
+
 UFF Utils is a command-line tool for inspecting and manipulating UFF files (e.g., take subsets, move, rotate, scale). For example, if you want to take a subset of every 1000th node, scale from m to mm, and inspect the resulting file, you can do: 
 
 ```powershell 
@@ -70,7 +79,7 @@ uffutils move in.uff out.uff --xyz 10.0 20.0 30.0
 You can rotate the data: 
 
 ```sh 
-uffutils rotate in.uff out.uff --xyz 90 90 90 --origin 0 0 0
+uffutils rotate in.uff out.uff --angles 90 90 90
 ```
 
 ## Combining operations in a single command 

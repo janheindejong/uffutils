@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 from abc import abstractmethod
+from enum import Enum
 from typing import Iterable, Protocol, runtime_checkable
 
 from uffutils.uff.subsetmap import SubsetMap
+from uffutils.uff.rotatemap import RotateMap
 
 
 class Dataset:
@@ -38,7 +40,13 @@ class ITranslatable(Protocol):
     def translate(self, x: float, y: float, z: float) -> None: ...
 
 
-class UFF15Dataset(Dataset, ISubsetable, IScaleable, ITranslatable):
+@runtime_checkable
+class IRotatable(Protocol):
+    @abstractmethod
+    def rotate(self, angles: tuple[float, float, float]) -> None: ...
+
+
+class UFF15Dataset(Dataset, ISubsetable, IScaleable, ITranslatable, IRotatable):
     @property
     def node_nums(self) -> list[int]:
         return list(map(int, self._ds["node_nums"]))
@@ -59,13 +67,31 @@ class UFF15Dataset(Dataset, ISubsetable, IScaleable, ITranslatable):
         for translation, d in zip((x, y, z), "xyz", strict=False):
             self._ds[d] = [pos + translation for pos in self._ds[d]]
 
+    def rotate(self, angles: tuple[float, float, float]) -> None:
+        rotate_map = RotateMap(angles, ("x", "y", "z"))
+        rotate_map.apply(self._ds)
 
-class UFF55Dataset(Dataset, ISubsetable):
+
+class UFF55Dataset(Dataset, ISubsetable, IRotatable):
+
+    @property
+    def has_rotations(self) -> bool:
+        return self._ds["data_ch"] == 3
+
     def subset(self, target_nodes: Iterable[int]):
+        fields = ["node_nums", "r1", "r2", "r3"]
+        if self.has_rotations:
+            fields += ["r4", "r5", "r6"]
         subset_map = SubsetMap(
             self._ds["node_nums"],
             target_nodes,
-            ["node_nums", "r1", "r2", "r3"],
-            ["r4", "r5", "r6"],
+            fields,
         )
         subset_map.apply(self._ds)
+
+    def rotate(self, angles: tuple[float, float, float]) -> None:
+        rotate_maps = [RotateMap(angles, ("r1", "r2", "r3"))]
+        if self.has_rotations:
+            rotate_maps.append(RotateMap(angles, ("r4", "r5", "r6")))
+        for rmap in rotate_maps:
+            rmap.apply(self._ds)

@@ -1,6 +1,7 @@
 import math
 
 import pytest
+import numpy as np
 
 from uffutils import UFFData, read
 
@@ -99,3 +100,17 @@ def test_translate(dataset: UFFData):
     assert data[0]["x"] == pytest.approx([120.85, 120.85, 120.85])
     assert data[0]["y"] == pytest.approx([8.437999, 41.246, 74.055])
     assert data[0]["z"] == pytest.approx([15.682, 15.682, 15.682])
+
+
+def test_rotate(dataset: UFFData):
+    dataset.subset(n_max=3)
+    dataset.rotate((np.pi / 2 , np.pi / 2 , np.pi / 2))
+    data = list(dataset.export())
+
+    assert data[0]["x"] == pytest.approx([12.682, 12.682, 12.682])
+    assert data[0]["y"] == pytest.approx([6.438, 39.246, 72.055])
+    assert data[0]["z"] == pytest.approx([-119.85, -119.85, -119.85])
+
+    assert data[1]["r1"] == pytest.approx([0.14233, 0.13904, 0.13576])
+    assert data[1]["r2"] == pytest.approx([-0.37665, -0.37665, -0.37665])
+    assert data[1]["r3"] == pytest.approx([0.11726, -0.057409, -0.23208])

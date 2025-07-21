@@ -4,6 +4,7 @@ from typing import Generator
 
 from uffutils.uff.dataset import (
     Dataset,
+    IRotatable,
     IScaleable,
     ISubsetable,
     ITranslatable,
@@ -76,7 +77,10 @@ class UFFData:
             if isinstance(ds, IScaleable):
                 ds.scale(length=length)
 
-    def rotate(self, r_x, r_y, r_z) -> None: ...
+    def rotate(self, angles: tuple[float, float, float]) -> None: 
+        for ds in self._datasets: 
+            if isinstance(ds, IRotatable): 
+                ds.rotate(angles)
 
     def translate(self, x, y, z) -> None:
         for ds in self._datasets:
