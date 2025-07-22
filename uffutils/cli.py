@@ -107,7 +107,7 @@ def translate(inputfile: str, outputfile: str, xyz: tuple[float, float, float]):
     nargs=3,
     type=float,
     default=(0, 0, 0),
-    help="Roll, pitch & yaw angles (in degrees)",
+    help="Roll, pitch & yaw rotations, or extrensic X, Y and Z Tait-Bryan rotations [deg]",
 )
 def rotate(inputfile: str, outputfile: str, angles: tuple[float, float, float]):
     """Rotate data"""

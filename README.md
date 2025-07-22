@@ -94,6 +94,6 @@ You can combine commands through piping, like so:
 ```powershell
 uffutils subset input.uff --step 100 | `
     uffutils scale --length 1000 | `
-    uffutils move --xyz 10 20 30 | `
-    uffutils rotate - output.uff --xyz 90 0 0 
+    uffutils translate --xyz 10 20 30 | `
+    uffutils rotate - output.uff --angles 90 0 0 
 ```
