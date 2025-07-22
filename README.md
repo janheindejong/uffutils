@@ -71,12 +71,12 @@ You can scale length:
 uffutils scale input.uff output.uff --length 1000 
 ```
 
-### The `move` command
+### The `translate` command
 
 You can translate the data:
 
 ```powershell
-uffutils move input.uff output.uff --xyz 10.0 20.0 30.0 
+uffutils translate input.uff output.uff --xyz 10.0 20.0 30.0 
 ```
 
 ### The `rotate` command

@@ -3,8 +3,8 @@ from __future__ import annotations
 from abc import abstractmethod
 from typing import Iterable, Protocol, runtime_checkable
 
-from uffutils.uff.subsetmap import SubsetMap
 from uffutils.uff.rotatemap import RotateMap
+from uffutils.uff.subsetmap import SubsetMap
 
 
 class Dataset:
@@ -72,7 +72,6 @@ class UFF15Dataset(Dataset, ISubsetable, IScaleable, ITranslatable, IRotatable):
 
 
 class UFF55Dataset(Dataset, ISubsetable, IRotatable):
-
     @property
     def has_rotations(self) -> bool:
         return self._ds["data_ch"] == 3

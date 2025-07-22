@@ -82,8 +82,10 @@ def scale(inputfile: str, outputfile: str, length: float):
 @click.argument(
     "outputfile", type=click.Path(allow_dash=True), required=False, default="-"
 )
-@click.option("--xyz", nargs=3, type=float, default=(0, 0, 0), help="X,Y,Z-translations")
-def move(inputfile: str, outputfile: str, xyz: tuple[float, float, float]):
+@click.option(
+    "--xyz", nargs=3, type=float, default=(0, 0, 0), help="X,Y,Z-translations"
+)
+def translate(inputfile: str, outputfile: str, xyz: tuple[float, float, float]):
     """Translate data"""
     data = _read_input(inputfile)
     data.translate(*xyz)
@@ -100,7 +102,13 @@ def move(inputfile: str, outputfile: str, xyz: tuple[float, float, float]):
 @click.argument(
     "outputfile", type=click.Path(allow_dash=True), required=False, default="-"
 )
-@click.option("--angles", nargs=3, type=float, default=(0, 0, 0), help="Roll, pitch & yaw angles (in degrees)")
+@click.option(
+    "--angles",
+    nargs=3,
+    type=float,
+    default=(0, 0, 0),
+    help="Roll, pitch & yaw angles (in degrees)",
+)
 def rotate(inputfile: str, outputfile: str, angles: tuple[float, float, float]):
     """Rotate data"""
     data = _read_input(inputfile)

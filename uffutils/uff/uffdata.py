@@ -77,9 +77,9 @@ class UFFData:
             if isinstance(ds, IScaleable):
                 ds.scale(length=length)
 
-    def rotate(self, angles: tuple[float, float, float]) -> None: 
-        for ds in self._datasets: 
-            if isinstance(ds, IRotatable): 
+    def rotate(self, angles: tuple[float, float, float]) -> None:
+        for ds in self._datasets:
+            if isinstance(ds, IRotatable):
                 ds.rotate(angles)
 
     def translate(self, x, y, z) -> None:

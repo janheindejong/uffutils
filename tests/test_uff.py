@@ -1,7 +1,7 @@
 import math
 
-import pytest
 import numpy as np
+import pytest
 
 from uffutils import UFFData, read
 
@@ -12,18 +12,18 @@ test_data = datasets["large"]
 
 @pytest.fixture
 def dataset() -> UFFData:
-    return read(str(test_data["path"]))
+    return read(str(test_data.path))
 
 
 def test_sets(dataset: UFFData):
-    assert len(dataset) == test_data["properties"]["n_sets"]
-    assert dataset.get_set_types() == test_data["properties"]["sets"]
+    assert len(dataset) == test_data.properties.n_sets
+    assert dataset.get_set_types() == test_data.properties.sets
 
 
 def test_nodes(dataset: UFFData):
     nodes = dataset.get_nodes()
-    assert len(nodes) == test_data["properties"]["n_nodes"]
-    assert nodes[:3] == test_data["properties"]["first_node_nums"]
+    assert len(nodes) == test_data.properties.n_nodes
+    assert nodes[:3] == test_data.properties.first_node_nums
 
 
 def test_subset_step(dataset: UFFData):
@@ -31,8 +31,8 @@ def test_subset_step(dataset: UFFData):
     nodes = dataset.get_nodes()
     data = list(dataset.export())
 
-    expected_nodes = test_data["properties"]["first_node_nums"][::2]
-    expected_n_nodes = math.ceil(test_data["properties"]["n_nodes"] / 2)
+    expected_nodes = test_data.properties.first_node_nums[::2]
+    expected_n_nodes = math.ceil(test_data.properties.n_nodes / 2)
 
     # Verify if UFF15 is handled correctly
     assert nodes[:2] == expected_nodes
@@ -67,15 +67,12 @@ def test_subset_max(dataset: UFFData):
     data = list(dataset.export())
 
     # Verify if UFF15 is handled correctly
-    assert nodes == test_data["properties"]["first_node_nums"]
+    assert nodes == test_data.properties.first_node_nums
     assert len(nodes) == 3
 
     # Verify if UFF55 sets are handled correctly
     assert len(data[1]["node_nums"]) == 3
-    assert (
-        list(map(int, data[1]["node_nums"]))
-        == test_data["properties"]["first_node_nums"]
-    )
+    assert list(map(int, data[1]["node_nums"])) == test_data.properties.first_node_nums
     assert len(data[1]["r1"]) == 3
     assert data[1]["r1"][2] == 0.23208
 
@@ -104,7 +101,7 @@ def test_translate(dataset: UFFData):
 
 def test_rotate(dataset: UFFData):
     dataset.subset(n_max=3)
-    dataset.rotate((np.pi / 2 , np.pi / 2 , np.pi / 2))
+    dataset.rotate((np.pi / 2, np.pi / 2, np.pi / 2))
     data = list(dataset.export())
 
     assert data[0]["x"] == pytest.approx([12.682, 12.682, 12.682])
